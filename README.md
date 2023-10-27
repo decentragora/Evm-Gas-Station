@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Evm Gas Station
 
-## Getting Started
+## Table of Contents
+- [Evm Gas Station](#evm-gas-station)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Supported Networks](#supported-networks)
+  - [Features](#features)
+    - [Real-Time Gas Monitoring](#real-time-gas-monitoring)
+    - [Gas Estimation](#gas-estimation)
+    - [Network Selection](#network-selection)
+  - [Technical Overview](#technical-overview)
+  - [Contributing](#contributing)
+## Introduction
 
-First, run the development server:
+EVM Gas Station serves as a one-stop-shop for real-time gas price monitoring, estimations, and network comparisons. Whether you are a developer, trader, or casual Ethereum user, EVM Gas Station aims to provide you with the most accurate and up-to-date gas information to optimize your blockchain transactions.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Supported Networks
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+EVM Gas Station supports an extensive range of EVM-compatible networks, making it versatile for users operating on different blockchains. The supported networks include:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **[Homestead](https://ethereum.org/)**: Ethereum Mainnet
+- **[Matic](https://polygon.technology/)**: Polygon network
+- **[Optimism](https://optimism.io/)**: Optimism Network
+- **[Arbitrum](https://arbitrum.io/)**: Arbitrum Network
+- **[Base](https://base.org/)**: Base Network (superchain)
+- **[Avalanche](https://www.avax.network/)**: High-throughput blockchain
+- **[Metis](https://www.metis.io/)**: Optimized for decentralized applications
+- **[BSC](https://www.binance.org/en/smartChain)**: Binance Smart Chain
+- **[Linea](https://linea.build/)**: Specific use-case blockchain ([Homepage](#))
+- **[Filecoin](ipns://filecoin.io/)**: Decentralized storage network
+- **[Gnosis](https://gnosis.io/)**: Prediction market platform
+- **[Scroll](https://scroll.io/)**: (Description and [Homepage](#))
+- **[Fantom](https://fantom.foundation/)**: High-performance, scalable blockchain
+- **[zkSync](https://zksync.io/)**: Layer 2 scaling solution using zk-Rollups
+- **[Celo](https://celo.org/)**: Mobile-first blockchain platform
+- **[Moonbeam](https://moonbeam.network/)**: Ethereum-compatible smart contract platform
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+EVM Gas Station comes packed with a host of features aimed at providing a comprehensive understanding of gas prices and behavior across multiple networks:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Real-Time Gas Monitoring
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+The application provides a real-time gas price graph, allowing you to monitor the current gas prices across various EVM-compatible networks.
 
-## Deploy on Vercel
+### Gas Estimation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Get accurate gas price estimates for common transactions like sending ETH, token transfers, and smart contract interactions.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Network Selection
+
+Easily switch between different EVM-compatible networks to view gas prices or estimate transaction costs. Supported networks include Ethereum Mainnet, Polygon, Optimism, and more.
+
+## Technical Overview
+
+EVM Gas Station is built using [Viem](https://github.com/wagmi-dev/viem) and [NextJs](https://nextjs.org), a lightweight and flexible blockchain client for EVM-compatible networks. Viem provides the foundational layer for fetching real-time data, enabling the application to support an extensive range of EVM-compatible networks with ease.
+
+## Contributing
+
+EVM Gas Station is an open-source project, and contributions are warmly welcomed! Here's how you can contribute:
+
+1. **Fork the Repository**: Fork the EVM Gas Station repository to your own GitHub account.
+2. **Clone the Fork**: Clone your fork locally on your computer.
+3. **Create a New Branch**: Make a new branch for your feature or bugfix.
+4. **Make Changes**: Implement your changes, improvements, or fixes.
+5. **Test**: Make sure to test your changes.
+6. **Commit and Push**: Commit your changes and push them to your fork.
+7. **Pull Request**: Submit a Pull Request from your fork to the EVM Gas Station repository.
+
+

@@ -27,8 +27,7 @@ export function useNativeCurrency(client: string) {
         client === "base" ||
         client === "linea" ||
         client === "scroll" ||
-        client === "zkSync" ||
-        client === "zora" 
+        client === "zkSync" 
       ) {
         const data = await clients.homestead.readContract({
           address: MainnetPriceOracleAddress,

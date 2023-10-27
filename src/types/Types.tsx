@@ -15,7 +15,6 @@ export type Clients = {
     scroll?: ReturnType<typeof createPublicClient>
     fantom?: ReturnType<typeof createPublicClient>
     zkSync?: ReturnType<typeof createPublicClient>
-    zora?: ReturnType<typeof createPublicClient>
     celo?: ReturnType<typeof createPublicClient>
     moonbeam?: ReturnType<typeof createPublicClient>
 }

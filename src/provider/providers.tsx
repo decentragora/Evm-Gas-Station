@@ -94,11 +94,6 @@ export const clients: Clients | any = {
         transport: AnkrTransports.zkSync,
     }),
 
-    zora: createPublicClient({
-        chain: zora,
-        transport: http(),
-    }),
-
     celo: createPublicClient({
         chain: celo,
         transport: http(),

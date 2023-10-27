@@ -25,7 +25,6 @@ export default function Home() {
     scroll: { currentGwei: 0 },
     fantom: { currentGwei: 0 },
     zkSync: { currentGwei: 0 },
-    zora: { currentGwei: 0 },
     celo: { currentGwei: 0 },
     moonbeam: { currentGwei: 0 },
   });
