@@ -100,7 +100,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    animation: updateShadow 12s linear infinite;
+    animation: updateShadow 12.25s linear infinite;
     z-index: -1;
 }
 

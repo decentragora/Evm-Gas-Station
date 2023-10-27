@@ -91,15 +91,13 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch data initially
-    FetchData();
+    FetchData().then(() => {
+      const intervalId = setInterval(async () => {
+        await FetchData();
+      }, 12000);
 
-    // Setup an interval to fetch data every 6 seconds
-    const intervalId = setInterval(async () => {
-      await FetchData();
-    }, 12000);
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(intervalId);
+      return () => clearInterval(intervalId);
+    });
   }, []);
 
   return (
@@ -122,8 +120,8 @@ export default function Home() {
             <NetworkSelector
               selectedClient={selectedClient}
               setSelectedClient={setSelectedClient}
-              clients={clients}
               gasData={gasData}
+              isLoading={isLoading}
             />
           </div>
           <div className={styles.graph_and_estimate_container}>
