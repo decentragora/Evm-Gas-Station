@@ -1,0 +1,122 @@
+/* Path: src/components/NetworkSelector.css */
+.embla__container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.embla__viewport {
+    overflow: hidden;
+}
+
+.network_icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.network_icon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 148px;
+    min-width: 148px;
+    margin: 0 4px;
+    cursor: pointer;
+    gap: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(4, 238, 255, 0.445);
+    border-radius: 12px;
+}
+
+.network_icon:hover {
+    border: 1px solid rgba(255, 255, 255, 1);
+    background-color: var(--selected-color);
+}
+
+.icon_name {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font-family);
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: capitalize;
+}
+
+.icon_current_gwei {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--font-family);
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.icon_logo {
+    width: 42px;
+    height: 42px;
+}
+
+.selected {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+
+.embla__button_next,
+.embla__button_prev {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    backface-visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0 6px;
+}
+
+.embla__button_prev {
+    left: 0;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.embla__button_next {
+    right: 0;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.shadow_animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    animation: updateShadow 12s linear infinite;
+    z-index: -1;
+}
+
+@keyframes updateShadow {
+    0% {
+        box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.25);
+    }
+    100% {
+        box-shadow: inset 150px 0px 10px rgba(0, 0, 0, 0.25);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .network_icon {
+        min-height: 116px;
+        min-width: 116px;
+    }
+
+}

@@ -1,95 +1,150 @@
+'use client'
+import React, { useState, useEffect, use } from 'react'
 import Image from 'next/image'
 import styles from './page.module.css'
+import { clients } from '@/provider/providers'
+import { Loading, NetworkSelector, Estimate, GasGraph, MissingGraph } from '@/components'
+import { Clients, GasData } from '@/types/Types'
+import { formatGwei } from 'viem'
+import { useNativeCurrency } from '@/hooks'
+
 
 export default function Home() {
+  const [gasData, setGasData] = useState<GasData>({
+    homestead: { currentGwei: 0 },
+    matic: { currentGwei: 0 },
+    optimism: { currentGwei: 0 },
+    arbitrum: { currentGwei: 0 },
+    base: { currentGwei: 0 },
+    avalanche: { currentGwei: 0 },
+    metis: { currentGwei: 0 },
+    bsc: { currentGwei: 0 },
+    linea: { currentGwei: 0 },
+    filecoin: { currentGwei: 0 },
+    gnosis: { currentGwei: 0 },
+    scroll: { currentGwei: 0 },
+    fantom: { currentGwei: 0 },
+    zkSync: { currentGwei: 0 },
+    zora: { currentGwei: 0 },
+    celo: { currentGwei: 0 },
+    moonbeam: { currentGwei: 0 },
+  });
+  const [feeHistory, setFeeHistory] = useState<any>({});
+  const [selectedClient, setSelectedClient] = useState('homestead');
+  const [isLoading, setIsLoading] = useState(true);
+  const NativeCurrencyPrice: number = useNativeCurrency(selectedClient) || 0;
+
+  const FetchData = async () => {
+    const [gasData, feeHistory] = await Promise.all([
+      FetchClientsCurrentGwei(),
+      FetchFeeHistory()
+    ]);
+    setIsLoading(false);
+  }
+
+  const FetchClientsCurrentGwei = async () => {
+    const promises = Object.keys(clients).map(async (client) => {
+      const data = await clients[client].getGasPrice();
+      if (client === 'metis' || client === 'celo' || client === 'scroll') return { data, maxPriorityFeePerGas: BigInt(0) };
+      const maxPriorityFeePerGas = await clients[client].estimateMaxPriorityFeePerGas();
+      return { data, maxPriorityFeePerGas }
+    });
+    const data = await Promise.all(promises);
+    const formattedData = data.reduce((acc: GasData, curr, index) => {
+      const name = Object.keys(clients)[index];
+      acc[name as keyof GasData] = {
+        currentGwei: Number(formatGwei(curr.data)),
+        rawGwei: curr.data,
+        maxPriorityFeePerGas: Number(formatGwei(curr.maxPriorityFeePerGas)),
+        rawMaxPriorityFeePerGas: curr.maxPriorityFeePerGas
+      };
+      return acc;
+    }, {} as GasData);
+    setGasData(formattedData);
+    return formattedData;
+  }
+
+  const FetchFeeHistory = async () => {
+    const promises = Object.keys(clients).map(async (client) => {
+      if (client === 'metis' || client === 'celo' || client === 'scroll') return null;
+      const data: any = await clients[client].getFeeHistory({
+        blockCount: 50,
+        rewardPercentiles: [1, 50, 99]
+      }).catch((err: Error) => {
+        console.error(err);
+      })
+      return data;
+    });
+    const data = await Promise.all(promises);
+    const formattedData = data.reduce((acc, curr, index) => {
+      // dont add metis and other clients that dont have fee history 
+      if (curr === null) return acc;
+      const name = Object.keys(clients)[index];
+      if (curr && curr.baseFeePerGas) {
+        curr.baseFeePerGas = curr.baseFeePerGas.filter((x: any) => x !== null); // or replace null with a default value
+      }
+      acc[name] = curr;
+      return acc;
+    }, {});
+    setFeeHistory(formattedData);
+    return formattedData;
+  }
+
+  useEffect(() => {
+    // Fetch data initially
+    FetchData();
+
+    // Setup an interval to fetch data every 6 seconds
+    const intervalId = setInterval(async () => {
+      await FetchData();
+    }, 12000);
+
+    // Clear the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className={styles.client_selector_container}>
+          <div className={styles.client_selector}>
+            <div className={styles.client_info_container}>
+              <div className={styles.client_info}>
+                <span className={styles.label}>Selected Network</span>
+                <span className={styles.value}>{selectedClient}</span>
+              </div>
+              <div className={styles.client_info}>
+                <span className={styles.label}>Native Currency Price</span>
+                <span className={styles.value_price}>$ {NativeCurrencyPrice ? NativeCurrencyPrice.toFixed(2) : "..."} </span>
+              </div>
+            </div>
+            <NetworkSelector
+              selectedClient={selectedClient}
+              setSelectedClient={setSelectedClient}
+              clients={clients}
+              gasData={gasData}
             />
-          </a>
+          </div>
+          <div className={styles.graph_and_estimate_container}>
+            <div className={styles.graph_container}>
+              {!feeHistory[selectedClient] ? <MissingGraph /> :
+                <GasGraph
+                  selectedClient={selectedClient}
+                  feeHistory={feeHistory}
+                />}
+            </div>
+            <div className={styles.estimate_container}>
+              <Estimate
+                selectedClient={selectedClient}
+                gasData={gasData}
+                nativeCurrencyPrice={NativeCurrencyPrice}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      )}
     </main>
   )
 }

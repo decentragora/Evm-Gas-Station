@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    top: 0;
+    position: fixed;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 64px;
+    padding: 0 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(140, 6, 167, 0.801);
+    gap: 16px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-transform: capitalize;
+    font-family: var(--font-family);
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,44 @@
+.gasGraphContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+  color: var(--foreground-color);
+}
+
+.missingGraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 95%;
+  border-radius: 12px;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+}
+
+.missingGraphText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: var(--font-family);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .gasGraphContainer {
+    width: 95vw;
+    padding: 1rem;
+  }
+
+  .missingGraphText {
+    font-size: 1.2rem;  /* Slightly reducing the font size */
+    margin-bottom: 0.5rem; /* Slightly reducing the margin */
+  }
+}
+
+

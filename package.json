@@ -9,16 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource-variable/space-grotesk": "^5.0.15",
+    "bufferutil": "^4.0.8",
+    "chart.js": "^4.4.0",
+    "embla-carousel": "^8.0.0-rc14",
+    "embla-carousel-react": "^8.0.0-rc14",
+    "embla-carousel-wheel-gestures": "^8.0.0-rc05",
+    "next": "13.5.6",
     "react": "^18",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
-    "next": "13.5.6"
+    "react-icons": "^4.11.0",
+    "utf-8-validate": "^6.0.3",
+    "viem": "^1.16.6"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "13.5.6"
+    "eslint-config-next": "13.5.6",
+    "typescript": "^5"
   }
 }

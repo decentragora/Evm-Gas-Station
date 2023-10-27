@@ -1,0 +1,84 @@
+/* Updated table component CSS */
+
+.table_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100%;
+    border-radius: 12px;
+    font-family: var(--font-family);
+    font-variant-numeric: tabular-nums;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.table_header {
+    font-weight: bold;
+    color: var(--foreground-color);
+    padding: 10px 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.table_row:nth-child(even) {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.table_row:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.table th,
+.table td {
+    display: table-cell;
+    font-variant-numeric: tabular-nums;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    color: var(--foreground-color);
+    font-family: var(--font-family);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table th:first-child {
+    border-top-left-radius: 12px;
+    text-align: left;
+}
+
+.table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.table th {
+    text-align: right;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    cursor: pointer;
+}
+
+.table_cell {
+    text-align: right;
+    font-size: 12px;
+    white-space: nowrap;
+    
+}
+
+.table_cell:first-child {
+    text-align: left;
+}
+
+/* Header cells */
+.table_header_cell {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: var(--font-family);
+    font-style: italic;
+    white-space: wrap;
+}
