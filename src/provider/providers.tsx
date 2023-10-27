@@ -20,7 +20,7 @@ const AnkrTransports = {
     filecoin: http(`https://rpc.ankr.com/filecoin/${process.env.ANKR_ID || ""}`),
     fantom: http(`https://rpc.ankr.com/fantom/${process.env.ANKR_ID || ""}`),
     scroll: http(`https://rpc.ankr.com/scroll/${process.env.ANKR_ID || ""}`),
-    zkSync: http(`https://rpc.ankr.com/zksync_era/${process.env.ANKR_ID || ""}`),
+    // zkSync: http(`https://rpc.ankr.com/zksync_era/${process.env.ANKR_ID || ""}`),
 }
 
 export const clients: Clients | any = {
@@ -89,10 +89,10 @@ export const clients: Clients | any = {
         transport: AnkrTransports.fantom,
     }),
 
-    zkSync: createPublicClient({
-        chain: zkSync,
-        transport: AnkrTransports.zkSync,
-    }),
+    // zkSync: createPublicClient({
+    //     chain: zkSync,
+    //     transport: AnkrTransports.zkSync,
+    // }),
 
     celo: createPublicClient({
         chain: celo,
