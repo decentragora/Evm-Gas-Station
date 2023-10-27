@@ -17,6 +17,8 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
     const estimatedTransactions: EstimatedTransactionsArray = [];
     let l1DataFee: any = 0;
     for (const transaction of CommonTransactions) {
+      // skip transactions that are not supported by the selected client (e.g. Arbitrum) using forNetwork property in transaction object
+      if (transaction.forNetwork && transaction.forNetwork !== selectedClient && transaction.forNetwork !== "all") continue;
       const exampleData = transaction.exampleData;
       if (selectedClient === "optimism") {
         l1DataFee = await EstimateOptimsimL1DataFees(exampleData);

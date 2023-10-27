@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8rem;
-  min-height: 100vh;
+  height: 100vh;
   color: var(--foreground-color);
   max-width: 75vw;
 }
@@ -69,6 +69,12 @@
   text-transform: capitalize;
 }
 
+.link_icon {
+  align-self: center;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
 .graph_and_estimate_container {
   display: flex;
   flex-direction: row;
@@ -126,7 +132,6 @@
   background-color: transparent;
 }
 
-
 @media screen and (max-width: 1300px) {
   .graph_and_estimate_container {
     flex-direction: column;
@@ -134,6 +139,7 @@
     align-items: center;
     gap: 1.5rem;
     width: 95vw;
+    min-height: 100vh;
   }
 
   .graph_container {

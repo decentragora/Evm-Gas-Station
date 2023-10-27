@@ -6,7 +6,8 @@ import { clients } from '@/provider/providers'
 import { Loading, NetworkSelector, Estimate, GasGraph, MissingGraph } from '@/components'
 import { Clients, GasData } from '@/types/Types'
 import { formatGwei } from 'viem'
-import { useNativeCurrency } from '@/hooks'
+import { useNativeCurrency, useCurrencyLink } from '@/hooks'
+import { HiOutlineExternalLink } from 'react-icons/hi'
 
 
 export default function Home() {
@@ -32,6 +33,8 @@ export default function Home() {
   const [selectedClient, setSelectedClient] = useState('homestead');
   const [isLoading, setIsLoading] = useState(true);
   const NativeCurrencyPrice: number = useNativeCurrency(selectedClient) || 0;
+  const coinGeckoLink = useCurrencyLink(selectedClient);
+
 
   const FetchData = async () => {
     const [gasData, feeHistory] = await Promise.all([
@@ -114,7 +117,14 @@ export default function Home() {
               </div>
               <div className={styles.client_info}>
                 <span className={styles.label}>Native Currency Price</span>
-                <span className={styles.value_price}>$ {NativeCurrencyPrice ? NativeCurrencyPrice.toFixed(2) : "..."} </span>
+                <span className={styles.value_price}>
+                  $ {NativeCurrencyPrice ? NativeCurrencyPrice.toFixed(2) : "..."} 
+                  <a href={coinGeckoLink} target="_blank" rel="noreferrer">
+                    <span className={styles.link_icon}>
+                      <HiOutlineExternalLink />
+                    </span>
+                  </a>
+                </span>
               </div>
             </div>
             <NetworkSelector

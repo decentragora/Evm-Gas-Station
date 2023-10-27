@@ -58,6 +58,14 @@
     color: rgba(255, 255, 255, 0.8);
 }
 
+.info_icon {
+    cursor: pointer;
+    align-self: center;
+    margin-left: 4px;
+    height: 16px;
+    width: 16px;
+}
+
 .icon_logo {
     width: 42px;
     height: 42px;
