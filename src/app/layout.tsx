@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+import type { Metadata, ResolvedMetadata } from 'next'
+import Head from 'next/head';
 import '@fontsource-variable/space-grotesk';
 import { Inter } from 'next/font/google'
 import { Footer, Header } from '@/components'
@@ -9,6 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Evm Gas Station',
+  category: 'Blockchain',
   description: 'One stop shop for all your evm gas needs',
   applicationName: 'Evm Gas Station',
   authors: [{ name: "0xOrphan", url: "https://0xorphan.vercel.app" }],
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
       sizes: '64x64',
       type: 'image/x-icon',
     },
-  ]
+  ],
 }
 
 export default function RootLayout({
@@ -42,6 +44,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>

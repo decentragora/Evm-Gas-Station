@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 8rem;
-  height: 100vh;
+  padding: 6rem;
+  height: 100%;
   color: var(--foreground-color);
   max-width: 75vw;
 }
@@ -14,7 +14,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .client_selector {
