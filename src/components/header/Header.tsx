@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className={styles.header}>
       <Image
-        src={"/EvmGsLogo.png"}
+        src={"/EvmGasLogo.png"}
         alt="Evm Gas Station Logo"
         width={50}
         height={50}

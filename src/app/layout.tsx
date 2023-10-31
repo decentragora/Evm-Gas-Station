@@ -17,6 +17,21 @@ export const metadata: Metadata = {
   creator: '0xOrphan',
   publisher: 'DecentrAgora',
   generator: 'Evm Gas Station',
+  twitter: { card: 'summary_large_image', site: '@0xOrphan', creator: '@0xOrphan', title: 'Evm Gas Station', description: 'One stop shop for all your evm gas needs', images: 'https://evmgasstation.com/api/twitter-image' },
+  openGraph: {
+    title: 'Evm Gas Station',
+    description: 'One stop shop for all your evm gas needs',
+    url: 'https://evmgasstation.com',
+    type: 'website',
+    images: [
+      {
+        url: 'https://evmgasstation.com/api/twitter-image',
+        width: 800,
+        height: 600,
+        alt: 'Evm Gas Station',
+      },
+    ],
+  },
   keywords: [
     'Ethereum', 'EVM', 'Gas', 'Gas Station', 'Blockchain', 'Smart Contracts', 
     'DeFi', 'Decentralized Finance', 'Crypto', 'Cryptocurrency', 'Gwei', 
