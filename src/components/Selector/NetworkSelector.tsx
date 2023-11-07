@@ -41,7 +41,7 @@ function NetworkSelector({ selectedClient, setSelectedClient, gasData, isLoading
               <div className={`${styles.network_icon} ${selectedClient === client ? styles.selected : ''}`} key={index} onClick={() => HandleNetworkIconClick(client)}>
                 <div className={`${animate ? styles.shadow_animation : ''}`}></div>
                 <div className={`${styles.shadow_animation} ${animate ? styles.animate : ''}`}></div>
-                <span className={styles.icon_name}>{client}</span>
+                <span className={styles.icon_name}>{client === "homestead" ? "Ethereum" : client}</span>
                 <img className={styles.icon_logo} src={`./networks/${client}_Logo.png`} alt={client} />
 
                   <span className={styles.icon_current_gwei}>

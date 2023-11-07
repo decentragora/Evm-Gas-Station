@@ -7,6 +7,7 @@
   height: 100%;
   color: var(--foreground-color);
   max-width: 75vw;
+  height: fit-content;
 }
 
 .client_selector_container {

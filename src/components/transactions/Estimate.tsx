@@ -4,7 +4,7 @@ import { OptimismGasOracle, ArbitrumGasOracle } from "@/contracts";
 import { CommonTransactions } from "@/data/transactions";
 import styles from "./estimate.module.css";
 import { formatEther, formatGwei } from "viem";
-import { Clients, EstimatedTransactionsArray } from "@/types/Types";
+import { EstimatedTransaction, EstimatedTransactionsArray } from "@/types/Types";
 import { clients } from "@/provider/providers";
 
 function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedClient: string; gasData: any; nativeCurrencyPrice: number; }) {
@@ -12,12 +12,25 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
   const [estimatedTransactions, setEstimatedTransactions] = useState<EstimatedTransactionsArray>([]);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [sortColumn, setSortColumn] = useState<string | null>(null);
+  const [customGasInputs, setCustomGasInputs] = useState<EstimatedTransaction>({
+    name: "Custom Input",
+    avgGasUsed: 69420,
+    estimatedCostInEth: 0,
+    estimatedCostInUsd: 0,
+  });
+
+  const HandleCustomGasInputChange = (value: string) => {
+    if (Number(value) > 30000000) value = "30000000";
+    setCustomGasInputs({
+      ...customGasInputs,
+      avgGasUsed: Number(value),
+    });
+  }
 
   const HandleEstimation = async () => {
     const estimatedTransactions: EstimatedTransactionsArray = [];
     let l1DataFee: any = 0;
     for (const transaction of CommonTransactions) {
-      // skip transactions that are not supported by the selected client (e.g. Arbitrum) using forNetwork property in transaction object
       if (transaction.forNetwork && transaction.forNetwork !== selectedClient && transaction.forNetwork !== "all") continue;
       const exampleData = transaction.exampleData;
       if (selectedClient === "optimism") {
@@ -29,13 +42,13 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
       }
 
       const totalGasUsed = BigInt(transaction.avgGasUsed);
-
       const _estimatedCostInEth = Number(
         formatEther(
           totalGasUsed * (BigInt(gasData[selectedClient].rawGwei) + gasData[selectedClient].rawMaxPriorityFeePerGas)
         )
       );
       const estimatedCostInEth = Number(_estimatedCostInEth) + Number(l1DataFee);
+
       estimatedTransactions.push({
         name: transaction.name,
         avgGasUsed: transaction.avgGasUsed,
@@ -47,7 +60,6 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
     setEstimatedTransactions(estimatedTransactions);
     setIsLoading(false);
   }
-
 
   const EstimateOptimsimL1DataFees = async (exampleData: string) => {
     const opGasOracleAddress = "0x420000000000000000000000000000000000000F";
@@ -133,10 +145,39 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
     return sortedTransactions;
   };
 
+  const EstimateCustomGas = async () => {
+    let l1DataFee: any = 0;
+    const exampleData = "0x";
+    if (selectedClient === "optimism") {
+      l1DataFee = await EstimateOptimsimL1DataFees(exampleData);
+    } else if (selectedClient === "arbitrum") {
+      l1DataFee = await EstimateArbitrumL1DataFees(exampleData);
+    } else if (selectedClient === "base") {
+      l1DataFee = await EstimateBaseL1DataFees(exampleData);
+    }
+
+    const totalGasUsed = BigInt(customGasInputs.avgGasUsed);
+    const _estimatedCostInEth = Number(
+      formatEther(
+        totalGasUsed * (BigInt(gasData[selectedClient].rawGwei) + gasData[selectedClient].rawMaxPriorityFeePerGas)
+      )
+    );
+    const estimatedCostInEth = Number(_estimatedCostInEth) + Number(l1DataFee);
+    setCustomGasInputs({
+      ...customGasInputs,
+      estimatedCostInEth: estimatedCostInEth,
+      estimatedCostInUsd: estimatedCostInEth * nativeCurrencyPrice,
+    });
+  }
+
   useEffect(() => {
     setIsLoading(true);
     HandleEstimation();
   }, [selectedClient, gasData, nativeCurrencyPrice]);
+
+  useEffect(() => {
+    EstimateCustomGas();
+  }, [customGasInputs.avgGasUsed, selectedClient, nativeCurrencyPrice]);
 
   const sortedTransactions = SortTransactions();
 
@@ -194,6 +235,52 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
           </tr>
         </thead>
         <tbody className={styles.table_body}>
+          <td className={styles.table_cell} colSpan={4}>
+            <p className={styles.custom_input_title}>Custom Gas Input</p>
+          </td>
+          <td className={styles.table_cell}>
+            <input
+              className={styles.custom_input}
+              type="number"
+              accept="number"
+              about="Custom Gas Input"
+              max="30000000"
+              onChange={(e) => HandleCustomGasInputChange(e.target.value)}
+              onBlur={(e) => HandleCustomGasInputChange(e.target.value)}
+              value={customGasInputs.avgGasUsed}
+            />
+          </td>
+          <td className={styles.table_cell}>
+            {!isLoading ? customGasInputs.estimatedCostInEth.toFixed(4)
+              : "..."}{" "}
+            {selectedClient === "bsc"
+              ? "BNB"
+              : selectedClient === "matic"
+                ? "MATIC"
+                : selectedClient === "avalanche"
+                  ? "AVAX"
+                  : selectedClient === "metis"
+                    ? "METIS"
+                    : selectedClient === "filecoin"
+                      ? "FIL"
+                      : selectedClient === "gnosis"
+                        ? "XDAI"
+                        : selectedClient === "fantom"
+                          ? "FTM"
+                          : selectedClient === "moonbeam"
+                            ? "GLMR"
+                            : selectedClient === "celo"
+                              ? "CELO"
+                              : "ETH"}
+          </td>
+          <td className={styles.table_cell}>
+            {!isLoading ? (customGasInputs.estimatedCostInUsd > 0.01
+              ? customGasInputs.estimatedCostInUsd.toFixed(2)
+              : customGasInputs.estimatedCostInUsd.toFixed(4))
+              : "..."}{" "}
+            USD
+          </td>
+
           {sortedTransactions.map((transaction, index) => (
             <tr key={index} className={styles.table_row}>
               <td className={styles.table_cell} colSpan={4}>

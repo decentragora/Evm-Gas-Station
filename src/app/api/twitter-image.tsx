@@ -65,7 +65,7 @@ export default async function handler() {
           ...({ '-webkit-background-clip': 'text' } as any),
         }}
       >
-        Ethereum • Polygon • BSC • Optimism • Arbitrum • xDai • Fantom • Avalanche • And more!
+        Ethereum • Polygon • BSC • Optimism • Arbitrum • And more!
       </div>
 
     </div>

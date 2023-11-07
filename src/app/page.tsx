@@ -113,7 +113,7 @@ export default function Home() {
             <div className={styles.client_info_container}>
               <div className={styles.client_info}>
                 <span className={styles.label}>Selected Network:</span>
-                <span className={styles.value}>{selectedClient}</span>
+                <span className={styles.value}>{selectedClient === "homestead" ? "Ethereum Mainnet" : selectedClient}</span>
               </div>
               <div className={styles.client_info}>
                 <span className={styles.label}>Native Currency Price:</span>

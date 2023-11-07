@@ -22,6 +22,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
+    "react-share": "^4.4.1",
     "react-tooltip": "^5.21.6",
     "utf-8-validate": "^6.0.3",
     "viem": "^1.16.6"

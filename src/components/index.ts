@@ -6,3 +6,4 @@ export { default as NetworkSelector } from './Selector/NetworkSelector';
 export { default as Estimate } from './transactions/Estimate';
 export { default as GasGraph } from './graph/GasGraph';
 export { default as MissingGraph } from './graph/MissingGraph';
+export { default as ShareModal } from './modals/ShareModal';

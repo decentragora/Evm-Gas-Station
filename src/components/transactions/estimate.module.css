@@ -82,3 +82,24 @@
     font-style: italic;
     white-space: wrap;
 }
+
+.custom_input_title {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: var(--font-family);
+    font-style: italic;
+    white-space: wrap;
+}
+
+.custom_input {
+    width: min-content;
+    text-align: right;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: var(--font-family);
+    white-space: wrap;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 4px;
+    font-variant-numeric: tabular-nums;
+}

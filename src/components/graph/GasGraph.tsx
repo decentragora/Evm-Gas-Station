@@ -36,7 +36,7 @@ Chart.defaults.plugins.subtitle.font = {
 };
 
 function GasGraph({ selectedClient, feeHistory }: { selectedClient: string; feeHistory: any }) {
-  Chart.defaults.plugins.subtitle.text = `Client: ${selectedClient}`;
+  Chart.defaults.plugins.subtitle.text = `Client: ${selectedClient === 'homestead' ? 'Ethereum Mainnet' : selectedClient.charAt(0).toUpperCase() + selectedClient.slice(1)}`;
   const historicalBlocks = 50;
   const graphData = feeHistory[selectedClient]; 
   if(selectedClient === 'metis') return null;
