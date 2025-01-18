@@ -214,13 +214,11 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
                         ? "FIL"
                         : selectedClient === "gnosis"
                           ? "XDAI"
-                          : selectedClient === "fantom"
-                            ? "FTM"
-                            : selectedClient === "moonbeam"
-                              ? "GLMR"
-                              : selectedClient === "celo"
-                                ? "CELO"
-                                : "ETH"}{" "}
+                          : selectedClient === "moonbeam"
+                            ? "GLMR"
+                            : selectedClient === "celo"
+                              ? "CELO"
+                              : "ETH"}{" "}
               {sortColumn === "estimatedCostInEth" &&
                 (sortDirection === "asc" ? "▼" : "▲")}
             </th>
@@ -265,13 +263,11 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
                       ? "FIL"
                       : selectedClient === "gnosis"
                         ? "XDAI"
-                        : selectedClient === "fantom"
-                          ? "FTM"
-                          : selectedClient === "moonbeam"
-                            ? "GLMR"
-                            : selectedClient === "celo"
-                              ? "CELO"
-                              : "ETH"}
+                        : selectedClient === "moonbeam"
+                          ? "GLMR"
+                          : selectedClient === "celo"
+                            ? "CELO"
+                            : "ETH"}
           </td>
           <td className={styles.table_cell}>
             {!isLoading ? (customGasInputs.estimatedCostInUsd > 0.01
@@ -304,13 +300,11 @@ function Estimate({ selectedClient, gasData, nativeCurrencyPrice, }: { selectedC
                           ? "FIL"
                           : selectedClient === "gnosis"
                             ? "XDAI"
-                            : selectedClient === "fantom"
-                              ? "FTM"
-                              : selectedClient === "moonbeam"
-                                ? "GLMR"
-                                : selectedClient === "celo"
-                                  ? "CELO"
-                                  : "ETH"}
+                            : selectedClient === "moonbeam"
+                              ? "GLMR"
+                              : selectedClient === "celo"
+                                ? "CELO"
+                                : "ETH"}
               </td>
               <td className={styles.table_cell}>
                 {!isLoading ? (transaction.estimatedCostInUsd > 0.01

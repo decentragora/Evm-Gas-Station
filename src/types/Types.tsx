@@ -13,7 +13,6 @@ export type Clients = {
     filecoin?: ReturnType<typeof createPublicClient>
     gnosis?: ReturnType<typeof createPublicClient>
     scroll?: ReturnType<typeof createPublicClient>
-    fantom?: ReturnType<typeof createPublicClient>
     zkSync?: ReturnType<typeof createPublicClient>
     celo?: ReturnType<typeof createPublicClient>
     moonbeam?: ReturnType<typeof createPublicClient>

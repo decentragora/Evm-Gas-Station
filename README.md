@@ -31,7 +31,6 @@ EVM Gas Station supports an extensive range of EVM-compatible networks, making i
 - **[Filecoin](ipns://filecoin.io/)**: Decentralized storage network
 - **[Gnosis](https://gnosis.io/)**: Prediction market platform
 - **[Scroll](https://scroll.io/)**: (Description and [Homepage](#))
-- **[Fantom](https://fantom.foundation/)**: High-performance, scalable blockchain
 - **[zkSync](https://zksync.io/)**: Layer 2 scaling solution using zk-Rollups
 - **[Celo](https://celo.org/)**: Mobile-first blockchain platform
 - **[Moonbeam](https://moonbeam.network/)**: Ethereum-compatible smart contract platform

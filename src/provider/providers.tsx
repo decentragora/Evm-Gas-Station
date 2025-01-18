@@ -1,6 +1,6 @@
 "use client"
 import { createPublicClient, http } from "viem"
-import { mainnet, polygon, optimism, base, arbitrum, avalanche, metis, bsc, linea, celo, filecoin, gnosis, fantom, scroll, canto, cronos, zkSync, eos, moonbeam, mantle, telos, zora, syscoin, } from "viem/chains"
+import { mainnet, polygon, optimism, base, arbitrum, avalanche, metis, bsc, linea, celo, filecoin, gnosis, scroll, canto, cronos, zkSync, eos, moonbeam, mantle, telos, zora, syscoin, } from "viem/chains"
 import { Client, Clients } from "@/types/Types"
 
 const InfuraTransports = {
@@ -18,7 +18,6 @@ const AnkrTransports = {
     bsc: http(`https://rpc.ankr.com/bsc/${process.env.ANKR_ID || ""}`),
     gnosis: http(`https://rpc.ankr.com/gnosis/${process.env.ANKR_ID || ""}`),
     filecoin: http(`https://rpc.ankr.com/filecoin/${process.env.ANKR_ID || ""}`),
-    fantom: http(`https://rpc.ankr.com/fantom/${process.env.ANKR_ID || ""}`),
     scroll: http(`https://rpc.ankr.com/scroll/${process.env.ANKR_ID || ""}`),
     zkSync: http(`https://rpc.ankr.com/zksync_era/${process.env.ANKR_ID || ""}`),
     moonbeam: http(`https://rpc.ankr.com/moonbeam/${process.env.ANKR_ID || ""}`),
@@ -83,11 +82,6 @@ export const clients: Clients | any = {
     scroll: createPublicClient({
         chain: scroll,
         transport: AnkrTransports.scroll,
-    }),
-
-    fantom: createPublicClient({
-        chain: fantom,
-        transport: AnkrTransports.fantom,
     }),
 
     zkSync: createPublicClient({

@@ -12,7 +12,6 @@ export function useNativeCurrency(client: string) {
   const MetisPriceOracleAddress     = "0xd4a5bb03b5d66d9bf81507379302ac2c2dfdfa6d";
   const BNBPriceOracleAddress       = "0x14e613ac84a31f709eadbdf89c6cc390fdc9540a";
   const FileCoinPriceOracleAddress  = "0x66f61fee824c1df059bcccc5f21ca39e083eefdf";
-  const FantomPriceOracleAddress    = "0xc19d58652d6bfc6db6fb3691eda6aa7f3379e4e9";
   const CeloPriceOracleAddress      = "0x0568fd19986748ceff3301e55c0eb1e729e0ab7e";
 
   const [price, setPrice] = useState<number | null>(null);
@@ -71,14 +70,6 @@ export function useNativeCurrency(client: string) {
       } else if (client === "filecoin") {
         const data = await clients.optimism.readContract({
           address: FileCoinPriceOracleAddress,
-          abi: ChainlinkPriceOracle,
-          functionName: "latestRoundData",
-        });
-        const unit256Price = data[1];
-        newPrice = Number(unit256Price) / Number(10 ** 8);
-      } else if (client === "fantom") {
-        const data = await clients.optimism.readContract({
-          address: FantomPriceOracleAddress,
           abi: ChainlinkPriceOracle,
           functionName: "latestRoundData",
         });

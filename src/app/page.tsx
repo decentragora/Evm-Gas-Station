@@ -24,7 +24,6 @@ export default function Home() {
     filecoin: { currentGwei: 0 },
     gnosis: { currentGwei: 0 },
     scroll: { currentGwei: 0 },
-    fantom: { currentGwei: 0 },
     zkSync: { currentGwei: 0 },
     celo: { currentGwei: 0 },
     moonbeam: { currentGwei: 0 },
